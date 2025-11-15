@@ -1,19 +1,21 @@
 
+
+
 let songs = [
     {
         name: "Supreme",
-        url: "songs/nira.mp3",
-        poster: "images/nira.jpg"
+        url: "songs/Supreme.mp3",
+        poster: "images/Supreme.jpg"
     },
     {
         name: "Winning Speech",
-        url: "songs/arabic.mp3",
-        poster: "images/arabic.jpg"
+        url: "songs/Winning Speech.mp3",
+        poster: "images/Winning Speech.jpg"
     },
     {
         name: "52 Bars",
-        url: "songs/vaathi.mp3",
-        poster: "images/vaathi.jpg"
+        url: "songs/52 Bars.mp3",
+        poster: "images/52 Bars.jpg"
     },
     {
         name: "Bewafa",
@@ -155,3 +157,59 @@ volumeBar.addEventListener("input", () => {
 });
 
 
+
+
+const playlistCards = document.querySelectorAll(".card");
+const playlistContainer = document.getElementById("playlistSongsContainer");
+const cardContainer = document.querySelector(".cardcontainer");
+const backBtn = document.getElementById("backBtn");
+
+
+let daySongs = [
+    { name: "52 Bars", url: "songs/52 Bars.mp3", poster: "images/52 Bars.jpg" },
+    { name: "Winning Speech", url: "songs/Winning Speech.mp3", poster: "images/Winning Speech.jpg" },
+    { name: "Supreme", url: "songs/Supreme.mp3", poster: "images/Supreme.jpg" }
+];
+
+let nightSongs = [
+    { name: "Bewafa", url: "songs/Bewafa.mp3", poster: "images/bewafa.jpg" },
+    { name: "Khyaal", url: "songs/Khyaal.mp3", poster: "images/Khyaal.jpg" },
+     {name: "Haseen", url: "songs/Haseen.mp3", poster: "images/Haseen.jpg" },
+      {name: "Dhundhala", url: "songs/Dhundhala.mp3", poster: "images/Dhundhala.jpg" }
+];
+
+playlistCards[0].addEventListener("click", () => openPlaylist(daySongs));
+playlistCards[1].addEventListener("click", () => openPlaylist(nightSongs));
+
+function openPlaylist(list) {
+    cardContainer.style.display = "none";
+    playlistContainer.style.display = "block";
+
+    playlistContainer.innerHTML = `
+    <button id="backBtn" class="back-btn">⬅ Back</button>
+`;
+
+
+    list.forEach((song, index) => {
+        let div = document.createElement("div");
+        div.classList.add("song-item");
+        div.innerHTML = `
+            <img src="${song.poster}">
+            <h4>${song.name}</h4>
+        `;
+        div.addEventListener("click", () => {
+            audio.src = song.url;
+            audio.play();
+            playPauseBtn.src = "pausesymbol.svg";
+            songInfo.innerHTML = `<img src="${song.poster}">${song.name}`;
+        });
+
+        playlistContainer.appendChild(div);
+    });
+
+    // back button handler
+    document.getElementById("backBtn").addEventListener("click", () => {
+        playlistContainer.style.display = "none";
+        cardContainer.style.display = "flex";
+    });
+}

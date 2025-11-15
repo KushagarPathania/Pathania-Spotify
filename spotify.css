@@ -99,6 +99,7 @@ body {
     width: 200px;
     padding: 10px;
     position: relative;
+    cursor: pointer;
     /* border-radius: 5px;
     background-color: #252525; */
 }
@@ -173,6 +174,7 @@ body {
     position: absolute;
     bottom: 0;
     padding: 10px;
+    
 
 }
 .songbutton{
@@ -350,4 +352,20 @@ input[type="range"]::-moz-range-thumb {
     background: #1db954;
     cursor: pointer;
 }
+.back-btn {
+    padding: 8px 15px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #181818;
+    color: white;
+    transition: all 0.3s ease;
+}
 
+.back-btn:hover {
+    background-color: #333;   /* changes automatically according to grey theme */
+    transform: scale(1.07);   /* button grows smoothly */
+    color: white;
+}
