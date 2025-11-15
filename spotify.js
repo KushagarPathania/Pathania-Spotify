@@ -19,6 +19,21 @@ let songs = [
         name: "Bewafa",
         url: "songs/Bewafa.mp3",
         poster: "images/bewafa.jpg"
+    },
+    {
+        name: "Haseen",
+        url: "songs/Haseen.mp3",
+        poster: "images/Haseen.jpg"
+    },
+    {
+        name: "Khyaal",
+        url: "songs/Khyaal.mp3",
+        poster: "images/Khyaal.jpg"
+    },
+    {
+        name: "Dhundhala",
+        url: "songs/Dhundhala.mp3",
+        poster: "images/Dhundhala.jpg"
     }
 ];
 
