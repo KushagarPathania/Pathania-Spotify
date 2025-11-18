@@ -1,7 +1,3 @@
-
-
-
-
 let songs = [
     {
         name: "Supreme",
@@ -44,7 +40,6 @@ let audio = new Audio();
 let currentIndex = 0;
 let isPlaying = false;
 
-
 const playPauseBtn = document.getElementById("playPauseBtn");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
@@ -77,8 +72,8 @@ function playSong() {
     audio.play();
     isPlaying = true;
 
-    playPauseBtn.src = "pausesymbol.svg"; 
-   
+    playPauseBtn.src = "pausesymbol.svg";  
+
     songInfo.innerHTML = `
     <img src="${songs[currentIndex].poster}">
     ${songs[currentIndex].name}`;
@@ -124,16 +119,15 @@ audio.addEventListener("timeupdate", () => {
     currentTimeEl.textContent = formatTime(audio.currentTime);
     durationEl.textContent = formatTime(audio.duration);
 });
+
+
 audio.addEventListener("loadedmetadata", () => {
-    const duration = audio.duration;
-    document.getElementById("totalTime").innerText = formatTime(duration);
+    document.getElementById("totalTime").innerText = formatTime(audio.duration);
 });
 
 audio.addEventListener("timeupdate", () => {
-    const current = audio.currentTime;
-    document.getElementById("currentTime").innerText = formatTime(current);
+    document.getElementById("currentTime").innerText = formatTime(audio.currentTime);
 });
-
 
 
 seekBar.addEventListener("input", () => {
@@ -148,23 +142,19 @@ function formatTime(time) {
     return `${mins}:${secs}`;
 }
 
-
-
 loadSongs();
-const volumeBar = document.getElementById("volumeBar");
 
+
+const volumeBar = document.getElementById("volumeBar");
 volumeBar.addEventListener("input", () => {
     audio.volume = volumeBar.value / 100;
 });
-
-
 
 
 const playlistCards = document.querySelectorAll(".card");
 const playlistContainer = document.getElementById("playlistSongsContainer");
 const cardContainer = document.querySelector(".cardcontainer");
 const backBtn = document.getElementById("backBtn");
-
 
 let daySongs = [
     { name: "52 Bars", url: "songs/52 Bars.mp3", poster: "images/52 Bars.jpg" },
@@ -175,8 +165,8 @@ let daySongs = [
 let nightSongs = [
     { name: "Bewafa", url: "songs/Bewafa.mp3", poster: "images/bewafa.jpg" },
     { name: "Khyaal", url: "songs/Khyaal.mp3", poster: "images/Khyaal.jpg" },
-     {name: "Haseen", url: "songs/Haseen.mp3", poster: "images/Haseen.jpg" },
-      {name: "Dhundhala", url: "songs/Dhundhala.mp3", poster: "images/Dhundhala.jpg" }
+    { name: "Haseen", url: "songs/Haseen.mp3", poster: "images/Haseen.jpg" },
+    { name: "Dhundhala", url: "songs/Dhundhala.mp3", poster: "images/Dhundhala.jpg" }
 ];
 
 playlistCards[0].addEventListener("click", () => openPlaylist(daySongs));
@@ -184,14 +174,12 @@ playlistCards[1].addEventListener("click", () => openPlaylist(nightSongs));
 
 function openPlaylist(list) {
     cardContainer.style.display = "none";
+    playlistContainer.innerHTML = `
+        <button id="backBtn" class="back-btn">⬅ Back</button>
+    `;
     playlistContainer.style.display = "block";
 
-    playlistContainer.innerHTML = `
-    <button id="backBtn" class="back-btn">⬅ Back</button>
-`;
-
-
-    list.forEach((song, index) => {
+    list.forEach(song => {
         let div = document.createElement("div");
         div.classList.add("song-item");
         div.innerHTML = `
@@ -204,13 +192,29 @@ function openPlaylist(list) {
             playPauseBtn.src = "pausesymbol.svg";
             songInfo.innerHTML = `<img src="${song.poster}">${song.name}`;
         });
-
         playlistContainer.appendChild(div);
     });
 
-    // back button handler
     document.getElementById("backBtn").addEventListener("click", () => {
         playlistContainer.style.display = "none";
         cardContainer.style.display = "flex";
     });
 }
+
+
+
+
+
+const ham = document.getElementById("hamburgerBtn");
+const sidebar = document.getElementById("leftPanel");
+const closeBtnSidebar = document.getElementById("closeSidebar");
+
+ham.addEventListener("click", () => {
+    sidebar.classList.add("active");
+    document.body.classList.add("sidebar-open");
+});
+
+closeBtnSidebar.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+    document.body.classList.remove("sidebar-open");
+});
